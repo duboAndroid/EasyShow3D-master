@@ -1,0 +1,9 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+easyshow3d/src/main/java/com/dyman/easyshow3d/bean/ObjProObject.java
