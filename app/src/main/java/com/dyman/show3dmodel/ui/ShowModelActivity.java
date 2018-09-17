@@ -24,12 +24,7 @@ import com.dyman.show3dmodel.utils.DialogUtils;
 import com.dyman.show3dmodel.utils.FileUtils;
 import com.dyman.show3dmodel.utils.TimeUtils;
 import com.dyman.show3dmodel.utils.ToastUtils;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class ShowModelActivity extends BaseActivity {
 
