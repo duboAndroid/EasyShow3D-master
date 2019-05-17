@@ -1,8 +1,10 @@
 package com.dyman.easyshow3d.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.GLUtils;
 import android.util.AttributeSet;
 
 
@@ -20,7 +22,8 @@ public class ModelView extends GLSurfaceView {
 
     private static final String TAG = "ModelView";
 
-    public final float TOUCH_SCALE_FACTOR = 180.0f/320;//角度缩放比例
+    //public final float TOUCH_SCALE_FACTOR = 180.0f/320;//角度缩放比例
+    public final float TOUCH_SCALE_FACTOR = 0.07f;//角度缩放比例
     public float mPreviousY;//上次的触控位置Y坐标
     public float mPreviousX;//上次的触控位置X坐标
     public float wholeScale = 1f;//整体的缩放比例
@@ -66,6 +69,22 @@ public class ModelView extends GLSurfaceView {
 
     public void setModelObject(ModelObject modelObject) {
         mRenderer.setModelObject(modelObject);
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        GLUtils.texImage2D
+                (
+                        GLES20.GL_TEXTURE_2D, //纹理类型
+                        0,
+//                        GLUtils.getInternalFormat(bitmapTmp),
+                        bitmap, //纹理图像
+//                        GLUtils.getType(bitmapTmp),
+                        0 //纹理边框尺寸
+                );
+//        if (drawableId != -1 && mBit == null) {
+        bitmap.recycle();          //纹理加载成功后释放图片
+        requestRender();//重绘画面
+//        postInvalidate();
     }
 
 

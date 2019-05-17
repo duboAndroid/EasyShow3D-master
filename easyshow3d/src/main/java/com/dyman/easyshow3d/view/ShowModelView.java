@@ -75,7 +75,7 @@ public class ShowModelView extends ModelView{
                 break;
 
             case MotionEvent.ACTION_UP:
-                if (touchMode == TOUCH_DRAG){ touchMode = TOUCH_NONE; }
+                 if (touchMode == TOUCH_DRAG){ touchMode = TOUCH_NONE; }
                 break;
         }
         return true;

@@ -47,7 +47,7 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
     /** 文件列表相关 */
     private RecyclerView fileListRv;
     private FileRvListAdapter fileAdapter;
-    private List<FileBean> fileList = new ArrayList<>();
+    private List<FileBean> fileListsss = new ArrayList<>();
 
     private String mDirectoryPath;
     private String mTitle;
@@ -118,19 +118,20 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
                     levelList.remove(levelList.size() - 1);//移除后levelList.size会自减
                 }
                 /** 延时200ms,以显示点击效果 */
-                new Handler().postDelayed(new Runnable() {
+                /*new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         readDirectory(directoryPath);
 
                     }
-                }, MyConfig.POST_DELAYED_TIME);
+                }, MyConfig.POST_DELAYED_TIME);*/
+                readDirectory(directoryPath);
             }
         });
         directoryLevelRv.setAdapter(adapter);
 
         //配置文件列表
-        if (!fileList.isEmpty()) { fileList.clear(); }
+        if (!fileListsss.isEmpty()) { fileListsss.clear(); }
         File[] files = new File(path).listFiles();
         if (files == null) {
             Log.e(TAG, "-------------------------------     files == null, path="+path);
@@ -152,7 +153,7 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
                         bean.setFilePath(file.getAbsolutePath());
                         bean.setFileType("dir");
                         bean.setCreateTime("");
-                        fileList.add(bean);
+                        fileListsss.add(bean);
                     }
                 } else {
                     String fileName = file.getName().toLowerCase();
@@ -162,26 +163,27 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
                         bean.setFilePath(file.getAbsolutePath());
                         bean.setFileType(FileUtils.getType(file.getAbsolutePath()));
                         bean.setCreateTime(TimeUtils.getTimeFormat(file.lastModified()));
-                        fileList.add(bean);
+                        fileListsss.add(bean);
                     }
                 }
             }
         }
-        fileAdapter = new FileRvListAdapter(this, fileList);
+        fileAdapter = new FileRvListAdapter(this, fileListsss);
         fileAdapter.setOnItemClickListener(new OnAdapterItemListener() {
             @Override
             public void onItemClick(View v, int position) {
-                final String filepath = fileList.get(position).getFilePath();
+                final String filepath = fileListsss.get(position).getFilePath();
                 File file = new File(filepath);
                 if (file.isDirectory()){
                     /** 延时300ms,以显示点击效果 */
-                    new Handler().postDelayed(new Runnable() {
+                    /*new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             readDirectory(filepath);
 
                         }
-                    }, 500);
+                    }, 500);*/
+                    readDirectory(filepath);
                 } else {
                     open3DFile(file);
                 }
@@ -241,12 +243,12 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
                         bean.setFilePath(file.getAbsolutePath());
                         bean.setFileType(FileUtils.getType(file.getAbsolutePath()));
                         bean.setCreateTime(TimeUtils.getTimeFormat(file.lastModified()));
-                        fileList.add(bean);
+                        fileListsss.add(bean);
                     }
                 }//for2
             }
         }//for1
-        fileAdapter = new FileRvListAdapter(this, fileList);
+        fileAdapter = new FileRvListAdapter(this, fileListsss);
         fileAdapter.setOnItemClickListener(this);
         fileListRv.setAdapter(fileAdapter);
     }
@@ -275,17 +277,18 @@ public class FileDirectoryActivity extends BaseActivity implements OnAdapterItem
     @Override
     public void onItemClick(View v, int position) {
         //TODO
-        final String filepath = fileList.get(position).getFilePath();
+        final String filepath = fileListsss.get(position).getFilePath();
         File file = new File(filepath);
         if (file.isDirectory()){
             /** 延时300ms,以显示点击效果 */
-            new Handler().postDelayed(new Runnable() {
+            /*new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    readDirectory(filepath);
+
 
                 }
-            }, 500);
+            }, 500);*/
+            readDirectory(filepath);
         } else {
             Log.i(TAG, "--------------------打开3D文件："+file.getName());
             open3DFile(file);
